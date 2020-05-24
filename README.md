@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <img src="doc/pictures/logo-3.png" height=80></img>
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/CodisLabs/codis?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -81,3 +82,7 @@ Codis is licensed under MIT， see MIT-LICENSE.txt
 
 -------------
 *You are welcome to use Codis in your product, and feel free to let us know~ :)*
+=======
+# codis
+codis 3.2 on k8s
+>>>>>>> 873d4b1bab20fcbcc2677c5151e175c8b83ced05
