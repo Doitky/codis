@@ -14,7 +14,7 @@ product_auth = ""
 #      codis-proxy and codis-server.
 #   2. session_auth is different from product_auth, it requires clients
 #      to issue AUTH <PASSWORD> before processing any other commands.
-session_auth = ""
+session_auth = "Auth@123"
 
 # Set bind address for admin(rpc), tcp only.
 admin_addr = "0.0.0.0:11080"

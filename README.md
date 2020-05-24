@@ -62,26 +62,7 @@ Sentinel
 ##Benchmarks
 [See benchmark results](doc/benchmark.md)
 
-##Authors
-
-Active authors:
-* [@spinlock9](https://github.com/spinlock) [微博@斯宾洛克](http://weibo.com/spinlock9)
-* [@yangzhe1991](https://github.com/yangzhe1991) [微博@\_杨肉\_](http://weibo.com/yangzhe1991)
-
-Emeritus authors:
-* [@goroutine](https://github.com/ngaut) [微博@goroutine](http://weibo.com/u/1923497393)
-* [@c4pt0r](https://github.com/c4pt0r) [微博@Dongxu\_Huang](http://weibo.com/c4pt0r)
-
-Thanks:
-* [@ivanzhaowy](https://github.com/ivanzhaowy)
-* [@Apache9](https://github.com/apache9) [微博@Apache9](http://weibo.com/u/1876829375)
-
-## License
-
-Codis is licensed under MIT， see MIT-LICENSE.txt
-
 -------------
-*You are welcome to use Codis in your product, and feel free to let us know~ :)*
 =======
 # codis
 codis 3.2 on k8s

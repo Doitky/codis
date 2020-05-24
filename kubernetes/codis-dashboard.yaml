@@ -14,10 +14,10 @@ spec:
       - name: your-registry
       containers:
       - name: codis-dashboard
-        image: codis-image
+        image: 10.110.2.233/system_store/codis-image:3.2
         imagePullPolicy: IfNotPresent
         command: ["codis-dashboard"]
-        args: ["-l","log/$(POD_NAME).log","-c","$(CODIS_PATH)/config/dashboard.toml","--host-admin","$(POD_IP):18080", "--zookeeper","$(ZK_ADDR)","--product_name","$(PRODUCT_NAME)","--pidfile","log/dashboard.pid","--remove-lock"]
+        args: ["-l","log/$(POD_NAME).log","-c","$(CODIS_PATH)/config/dashboard.toml","--host-admin","$(POD_IP):18080", "--zookeeper","$(ZK_ADDR)","--product_name","$(PRODUCT_NAME)","--pidfile","log/dashboard.pid","--remove-lock","--product_auth","$(PRODUCT_AUTH)"]
         lifecycle:
           postStart:
             exec:
@@ -28,6 +28,8 @@ spec:
         env:
         - name: CODIS_PATH
           value: "/gopath/src/github.com/CodisLabs/codis"
+        - name: PRODUCT_AUTH
+          value: "Auth@123"
         - name: POD_IP
           valueFrom:
             fieldRef:
@@ -39,7 +41,7 @@ spec:
         - name: ZK_ADDR
           value: "zookeeper:2181"
         - name: PRODUCT_NAME
-          value: "codis-test"
+          value: "codis-cluster"
         #- name: PRODUCT_AUTH
         #  value: ""
         ports:
@@ -50,5 +52,5 @@ spec:
             cpu: "4"
             memory: 4Gi
           requests:
-            cpu: "0.1"
-            memory: 0.1Gi
+            cpu: "1"
+            memory: 1Gi

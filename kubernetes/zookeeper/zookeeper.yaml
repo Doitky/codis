@@ -8,7 +8,7 @@ data:
   tick: "2000"
   init: "10"
   sync: "5"
-  client.cnxns: "60"
+  client.cnxns: "600"
   snap.retain: "3"
   purge.interval: "1"
 ---
@@ -54,14 +54,14 @@ spec:
       containers:
       - name: k8szk
         imagePullPolicy: IfNotPresent
-        image: gcr.io/google_samples/k8szk:v1
+        image: 10.110.2.233/system_store/k8szk:v1
         resources:
           limits:
-            cpu: "1"
+            cpu: "2"
             memory: 4Gi
           requests:
-            memory: "0.1Gi"
-            cpu: "0.1"
+            memory: "1Gi"
+            cpu: "1"
         ports:
         - containerPort: 2181
           name: client
@@ -132,17 +132,19 @@ spec:
             - "zkOk.sh"
           initialDelaySeconds: 15
           timeoutSeconds: 5
-#        volumeMounts:
-#        - name: datadir
-#          mountPath: /var/lib/zookeeper
+        volumeMounts:
+        - name: datadir
+          mountPath: /var/lib/zookeeper
       securityContext:
         runAsUser: 1000
         fsGroup: 1000
-#  volumeClaimTemplates:
-#  - metadata:
-#      name: datadir
-#    spec:
-#      accessModes: [ "ReadWriteOnce" ]
-#      resources:
-#        requests:
-#          storage: 5Gi
+  volumeClaimTemplates:
+  - metadata:
+      name: datadir
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "tenx-rbd0"
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi

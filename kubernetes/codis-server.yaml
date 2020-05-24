@@ -4,7 +4,7 @@ metadata:
   name: codis-server
 spec:
   serviceName: codis-server
-  replicas: 4
+  replicas: 8
   template:
     metadata:
       labels:
@@ -31,10 +31,10 @@ spec:
       - name: your-registry
       containers:
       - name: codis-server
-        image: codis-image
+        image: 10.110.2.233/system_store/codis-image:3.2
         imagePullPolicy: IfNotPresent
         command: ["codis-server"]
-        args: ["$(CODIS_PATH)/config/redis.conf","--logfile","$(POD_NAME).log","--protected-mode", "no", "--bind", "$(POD_IP)", "--daemonize", "no"]
+        args: ["$(CODIS_PATH)/config/redis.conf","--logfile","$(POD_NAME).log","--protected-mode", "no", "--bind", "$(POD_IP)", "--daemonize", "no","--requirepass","$(PRODUCT_AUTH)","--masterauth","$(PRODUCT_AUTH)"]
         lifecycle:
           postStart:
             exec:
@@ -54,6 +54,8 @@ spec:
           value: "2"
         - name: CODIS_PATH
           value: "/gopath/src/github.com/CodisLabs/codis"
+        - name: PRODUCT_AUTH
+          value: "Auth@123"
         - name: POD_IP
           valueFrom:
             fieldRef:
@@ -74,5 +76,18 @@ spec:
             cpu: "2"
             memory: 6Gi
           requests:
-            cpu: "0.1"
-            memory: 0.1Gi
+            cpu: "1"
+            memory: 1Gi
+        volumeMounts:
+        - name: datadir
+          mountPath: /codis
+  volumeClaimTemplates:
+  - metadata:
+      name: datadir
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "tenx-rbd0"
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 6Gi

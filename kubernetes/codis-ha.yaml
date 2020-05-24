@@ -30,7 +30,7 @@ spec:
       - name: your-registry
       containers:
       - name: codis-ha
-        image: codis-image
+        image: 10.110.2.233/system_store/codis-image:3.2
         imagePullPolicy: IfNotPresent
         command: ["codis-ha"]
         args: ["-l","log/$(POD_NAME).log","--interval","5","--dashboard=$(DASHBOARD_ADDR)"]
@@ -46,5 +46,5 @@ spec:
             cpu: "2"
             memory: 2Gi
           requests:
-            cpu: "0.1"
-            memory: 0.1Gi
+            cpu: "1"
+            memory: 1Gi
